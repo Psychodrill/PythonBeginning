@@ -9,26 +9,51 @@
 
 # Примечание: бинарной операцией называется любая операция, у которой ровно два аргумента, как, например, у операции умножения.
 
-def print_operation_table(operation, num_rows, num_columns):
-    if(num_rows>=2 and num_columns>=2):
-        for i in range(1,num_rows+1):
-            for j in range(1, num_columns+1):
-                if(i==1):
-                    print(j, end=' ')
-                    continue
-                if(j==1):
-                    print(i, end=' ')
-                    continue
-                result = operation(i,j)
-                print(result, end=' ')
-            print('')
-    else:
-        print("ОШИБКА! Размерности таблицы должны быть больше 2!")
+# def print_operation_table(operation, num_rows, num_columns):
+#     if(num_rows>=2 and num_columns>=2):
+#         for i in range(1,num_rows+1):
+#             row =[]
+#             for j in range(1, num_columns+1):
+#                 if(i==1):
+#                     row.append(j)
+#                     #print(j , end='')
+#                     continue
+#                 if(j==1):
+#                     row.append(i)
+#                     #print(f"{i} ")
+#                     continue
+#                 result = operation(i,j)
+#                 row.append(result)
+#                 #print(f"{result} ")
+#             #print("\n")
+#             print(' '.join(str(el) for el in row))
+#     else:
+#         print("ОШИБКА! Размерности таблицы должны быть больше 2!")
     
     
-#print_operation_table(lambda x, y: x * y, 3, 3)
-#print_operation_table(lambda x, y: x + y, 4, 4)
-print_operation_table(lambda x, y: x / y, 4, 4)
-#print_operation_table(lambda x, y: x * y, 3, 3)
+# #print_operation_table(lambda x, y: x * y, 3, 3)
+# print_operation_table(lambda x, y: x + y, 4, 4)
 
-#print(5, " ")
+# Винни-Пух попросил Вас посмотреть, есть ли в его стихах ритм. Поскольку разобраться в его кричалках не настолько просто, насколько легко он их придумывает, Вам стоит написать программу.
+
+# Винни-Пух считает, что ритм есть, если число слогов (т.е. число гласных букв) в каждой фразе стихотворения одинаковое.
+# Фраза может состоять из одного слова, если во фразе несколько слов, то они разделяются дефисами.
+# Фразы отделяются друг от друга пробелами.
+
+# Стихотворение  Винни-Пух передаст вам автоматически в переменную stroka в виде строки. В ответе напишите Парам пам-пам, если с ритмом все в порядке и Пам парам, если с ритмом все не в порядке.
+# Если фраза только одна, то ритм определить не получится и необходимо вывести: Количество фраз должно быть больше одной!.
+stroka = 'пара-ра-рам рам-пам-папам па-ра-па-дам'
+phrases =list(stroka.split())
+#words = map(
+print(phrases)
+print(filter(lambda x: x=='a', stroka))
+
+# def RhytmCalculation(f, stroka):
+#     print(filter(f, stroka))
+#     print(list(filter(f, stroka)))
+#     if(len(list(filter(f, stroka)))==0):
+#         print("Парам пам-пам")
+#     else:
+#         print("Пам парам")
+
+# RhytmCalculation(lambda x: stroka)
