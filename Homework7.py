@@ -42,18 +42,24 @@
 
 # Стихотворение  Винни-Пух передаст вам автоматически в переменную stroka в виде строки. В ответе напишите Парам пам-пам, если с ритмом все в порядке и Пам парам, если с ритмом все не в порядке.
 # Если фраза только одна, то ритм определить не получится и необходимо вывести: Количество фраз должно быть больше одной!.
-stroka = 'пара-ра-рам рам-пам-папам па-ра-па-дам'
+#stroka = 'пара-ра-рам рам-пам-папам па-ра-па-дам'
+#stroka = 'со-лнце-гре-ет ве-сной'
+# 'за-гад-ка-ра-свет-ка-ра-газ-да-не-на-ма-ли-ва-ла'
+stroka = 'как ве-тер сме-ёт лис-ти'
+# 'мо-локо и мёд'
+# 'по-русски говорят'
+# 'Пух'
+stroka1 = 'пера-ро-рим'
+#asd = list(filter(lambda y: y=='а'or y=='о' or y=='у' or y=='ы' or y=='и'or y=='я' or y=='э' or y=='е' or y=='ю'or y=='ё', stroka1))
+#print(asd)
 phrases =list(stroka.split())
-#words = map(
-print(phrases)
-print(filter(lambda x: x=='a', stroka))
+if(len(phrases)>1):
+#counts = list(map(lambda x: x.count('а'),phrases))
+    counts = list(map(lambda x: len(list(filter(lambda y: y=='а'or y=='о' or y=='у' or y=='ы' or y=='и'or y=='я' or y=='э' or y=='е' or y=='ю'or y=='ё', x))),phrases))
 
-# def RhytmCalculation(f, stroka):
-#     print(filter(f, stroka))
-#     print(list(filter(f, stroka)))
-#     if(len(list(filter(f, stroka)))==0):
-#         print("Парам пам-пам")
-#     else:
-#         print("Пам парам")
-
-# RhytmCalculation(lambda x: stroka)
+    if(len(set(counts))==1):
+        print("Парам пам-пам")
+    else:
+        print("Пам парам")
+else:
+    print("Количество фраз должно быть больше одной!")
