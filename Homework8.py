@@ -11,10 +11,11 @@
 
 def WorkWithPhonebook():
     choice = ShowMenu()
-    phonebook = ReadFile('phonebook.csv')
-    while(choice!=7):
+    #phonebook = ReadFile('phonebook.csv')
+    while(choice!=8):
+        phonebook = ReadFile('phonebook.csv')
         if(choice==1):
-           PrintResult(phonebook)
+            PrintResult(phonebook)
         elif(choice==2):
             lastname=input('Input lastname: ')
             print(FindByLastname(phonebook,lastname))
@@ -33,9 +34,13 @@ def WorkWithPhonebook():
             print(FindByPhoneNumber(phonebook,phoneNumber))
             input()
         elif(choice==6):
-            userData=input('userData')
+            userData=input('Input user data: ')
             AddUser(phonebook, userData)
             #WriteFile('phonebook.csv', phonebook)
+        elif(choice==7):
+            record=int(input('Input record number: '))
+            WriteToOtherFile('phonebook1.csv', phonebook,record)
+            input()
         choice = ShowMenu()
         
 def ShowMenu():
@@ -45,7 +50,8 @@ def ShowMenu():
           '4. Удалить запись\n'
           '5. Найти абонента по номеру телефона\n'
           '6. Добавить абонента в справочник\n'
-          '7. Закончить работу', sep='\n')
+          '7. Копировать строку записи в другой файл\n'
+          '8. Закончить работу', sep='\n')
     choice= int(input())
     return choice
 
@@ -58,13 +64,15 @@ def ReadFile(filename):
             phonebook.append(record)
     return phonebook
 
-def WriteFile(filename, phonebook):
+def WriteFile(filename, phonebook, isAdding):
     with open (filename, 'w', encoding='utf8') as fileData:
         for i in range(len(phonebook)):
             s=''
             for v in phonebook[i].values():
                 s+=v+','
-            fileData.write(f'{s[:-1]}\n')
+            fileData.write(f'{s[:-1]}')
+        if(isAdding):
+            fileData.write('\n')
 
 def PrintResult(phonebook):
     for rec in phonebook:
@@ -98,20 +106,31 @@ def ChangePhone(phonebook, lastname, phoneNumber):
         print("Not founded records!")
     elif(len(record)>1):
         print("More than one record founded!")
-    WriteFile('phonebook.csv', phonebook)
+    WriteFile('phonebook.csv', phonebook, False)
     return record
 
 def DeleteByLastname(phonebook,lastname):
     record = FindByLastname(phonebook,lastname)
     for item in record:
         phonebook.remove(item)
-    WriteFile('phonebook.csv', phonebook)
+    WriteFile('phonebook.csv', phonebook, False)
 
 def AddUser(phonebook, userData):
     values =userData.split(",")
     keys = phonebook[0].keys()
     newRecord = dict(zip(keys,values))
     phonebook.append(newRecord)
-    WriteFile('phonebook.csv', phonebook)
+    WriteFile('phonebook.csv', phonebook, True)
+
+def WriteToOtherFile(filename,phonebook,record):
+    with open (filename, 'w', encoding='utf8') as fileData:
+        for i in range(len(phonebook)):
+            if (i==record-1):
+                s=''
+                for v in phonebook[i].values():
+                    s+=v+','
+                fileData.write(f'{s[:-1]}')
+        fileData.write('\n')
+
 
 WorkWithPhonebook()
